@@ -1,0 +1,116 @@
+#N canvas 373 301 1113 698 10;
+#X obj 14 138 cnv 15 450 400 empty empty empty 20 12 0 14 -261234 -260097
+0;
+#X obj 524 38 cnv 15 450 400 empty empty empty 20 12 0 14 -261234 -66577
+0;
+#X obj 538 462 jackclock;
+#X floatatom 572 573 5 0 0 0 - - -;
+#X msg 668 190 start;
+#X msg 680 210 stop;
+#X msg 744 264 locate 30.5;
+#X msg 783 397 unloop;
+#X obj 675 493 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 672 507 print loopevent;
+#X msg 259 266 stop;
+#X msg 199 266 start;
+#X msg 199 227 bang;
+#X obj 65 513 dac~;
+#X msg 75 459 0;
+#X obj 64 481 readsf~ 2;
+#X obj 186 332 writesf~ 2;
+#X obj 538 596 /;
+#X floatatom 538 620 5 0 0 0 - - -;
+#X msg 538 115 bang;
+#X text 848 264 locate playhead;
+#X text 774 335 set a loop;
+#X text 625 572 jack sample rate;
+#X text 584 612 current playhead position in sample (here converted
+in seconds);
+#X obj 51 260 *~ 0.5;
+#X msg 64 437 open /tmp/pdexport.wav \, 1;
+#X msg 368 357 freewheel \$1;
+#X msg 385 331 0;
+#X msg 351 331 1;
+#X obj 51 236 osc~ 300;
+#X text 721 191 start and stop playhead;
+#X text 22 415 click "open" to listen to the recorded file (freewheel
+mode off);
+#X text 17 14 jackclock is attaching jack transport as a \, allowing
+for controling transport playhead. The freewheel mode allows for "faster
+than real-time" and can be used for exporting file without the need
+of waiting. The example provided here records a 100 seconds long soundfile
+as fast as the CPU can. Notice however that soundcard IOs are disabled
+when freewheel mode is enabled.;
+#X text 544 45 In order to observe playhead control \, you must open
+a jack client such as ardour. You need to set ardour with jack time
+instead of internal.;
+#X floatatom 606 541 5 0 0 0 - - -;
+#X obj 581 114 loadbang;
+#X obj 581 136 tgl 15 0 empty empty empty 17 7 0 10 -261234 -1 -1 1
+1;
+#X text 651 114 bang provides info;
+#X text 696 490 bang when looping;
+#X text 654 540 transport state (0 stopped \, 1 rolling \, 2 starting
+\, 3 unknown) - does not affect jack audio graph computation;
+#X obj 259 246 del 100000;
+#X obj 581 158 metro 100;
+#X msg 186 199 open /tmp/pdexport.wav;
+#X text 30 145 click "open" to enter the freewheel mode and record
+100 sec of audio. (need pd to run under jack audio and dsp activated)
+;
+#X obj 34 569 loadbang;
+#X msg 34 605 \; pd dsp 1;
+#X obj 109 586 metro 100;
+#X obj 109 609 f 0;
+#X obj 109 630 + 0.1;
+#X obj 194 586 cnv 15 100 60 empty empty empty 20 12 0 14 -191407 -66577
+0;
+#X text 212 591 pd time;
+#X floatatom 218 614 5 0 0 0 - - -;
+#X msg 775 356 loop 25.5 32.2;
+#X msg 750 286 locateframe 45000;
+#X msg 778 376 loopframe 44100 188200;
+#X connect 2 0 17 0;
+#X connect 2 1 3 0;
+#X connect 2 2 34 0;
+#X connect 2 3 8 0;
+#X connect 2 3 9 0;
+#X connect 3 0 17 1;
+#X connect 4 0 2 0;
+#X connect 5 0 2 0;
+#X connect 6 0 2 0;
+#X connect 7 0 2 0;
+#X connect 10 0 16 0;
+#X connect 10 0 27 0;
+#X connect 11 0 16 0;
+#X connect 11 0 28 0;
+#X connect 12 0 11 0;
+#X connect 12 0 40 0;
+#X connect 14 0 15 0;
+#X connect 15 0 13 0;
+#X connect 15 1 13 1;
+#X connect 17 0 18 0;
+#X connect 19 0 2 0;
+#X connect 24 0 16 0;
+#X connect 24 0 16 1;
+#X connect 25 0 15 0;
+#X connect 26 0 2 0;
+#X connect 27 0 26 0;
+#X connect 28 0 26 0;
+#X connect 29 0 24 0;
+#X connect 35 0 36 0;
+#X connect 36 0 41 0;
+#X connect 40 0 10 0;
+#X connect 41 0 2 0;
+#X connect 42 0 16 0;
+#X connect 42 0 12 0;
+#X connect 44 0 45 0;
+#X connect 44 0 46 0;
+#X connect 46 0 47 0;
+#X connect 47 0 48 0;
+#X connect 48 0 47 1;
+#X connect 48 0 51 0;
+#X connect 52 0 2 0;
+#X connect 53 0 2 0;
+#X connect 54 0 2 0;

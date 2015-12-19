@@ -1,0 +1,3 @@
+jackclock is attaching jack transport as a client, allowing for controlling transport playhead. The freewheel mode allows for "faster than real-time" and can be used for exporting file without the need of waiting. The example provided in help-jackclock records a 100 seconds long sound file as fast as the CPU can. Notice however that sound card IOs are disabled when freewheel mode is enabled.
+
+This has been initially written for pd 0.42 and jack1.
